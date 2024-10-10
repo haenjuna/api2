@@ -3,9 +3,9 @@ spring:
     name: api1
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3307/bootdb2
-    username: bootdb2user
-    password: bootdb2user
+    url: jdbc:mariadb://localhost:13306/bootdb
+    username: bootdbuser
+    password: bootdbuser
 
     hikari:
       minimum-idle: 2
