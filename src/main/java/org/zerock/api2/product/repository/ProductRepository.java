@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long>, ProductSearch {
 
     @Query("select " +
-            "new org.zerock.api2.product.dto.ProductReadDTO(p.pno, p.pname, p.price)" +
+            "new org.zerock.api2.product.dto.ProductReadDTO(p.pno, p.pname, p.price, p.status)" +
             "from Product p where p.pno = :pno")
     Optional<ProductReadDTO> read(@Param("pno") Long pno);
 

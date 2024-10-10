@@ -11,10 +11,11 @@ public class ProductReadDTO {
     private int price;
     private ProductStatus status;
 
-    public ProductReadDTO(Long pno, String pname, int price) {
+    public ProductReadDTO(Long pno, String pname, int price, ProductStatus status) {
         this.pno = pno;
         this.pname = pname;
         this.price = price;
+        this.status = status;
 
     }
 }

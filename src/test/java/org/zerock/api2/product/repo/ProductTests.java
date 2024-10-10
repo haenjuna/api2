@@ -9,6 +9,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.zerock.api2.common.dto.PageRequestDTO;
+import org.zerock.api2.common.dto.PageResponseDTO;
+import org.zerock.api2.product.dto.ProductListDTO;
 import org.zerock.api2.product.repository.ProductRepository;
 
 @DataJpaTest
@@ -41,5 +44,17 @@ public class ProductTests {
     public void testRead(){
 
         log.info(productRepository.read(11L));
+    }
+
+    @Test
+    public void testDTOList(){
+
+        PageRequestDTO requestDTO = PageRequestDTO.builder().build() ;
+
+        PageResponseDTO<ProductListDTO> result
+                = productRepository.list(requestDTO);
+
+        log.info(result);
+
     }
 }
