@@ -1,5 +1,6 @@
 package org.zerock.api2.product.repository.search;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
@@ -29,7 +30,13 @@ public class ReviewSearchImpl extends QuerydslRepositorySupport implements Revie
         JPQLQuery<Review> query = from(review);
         query.leftJoin(review.images, image);
         query.where(review.product.pno.eq(pno));
-        query.where(image.ord.eq(0));
+        //query.where(image.ord.eq(0));
+
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.or(image.isNull());
+        booleanBuilder.or(image.ord.eq(0));
+
+        query.where(booleanBuilder);
 
         this.getQuerydsl().applyPagination(pageable, query);
 

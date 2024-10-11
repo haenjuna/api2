@@ -2,6 +2,7 @@ package org.zerock.api2.product.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,6 +32,8 @@ public class Review {
     @ElementCollection
     @CollectionTable(name= "tbl_review_img")
     @Builder.Default
+    @Getter
+    @BatchSize(size = 20)
     private Set<ContentImage> images = new HashSet<>();
 
     public void addFile(String filename){

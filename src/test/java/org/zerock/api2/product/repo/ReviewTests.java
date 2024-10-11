@@ -58,7 +58,7 @@ public class ReviewTests {
                         Sort.by("rno").descending());
 
 
-        reviewRepository.listByProduct(13L,pageable);
+        reviewRepository.listByProductQuery(13L,pageable);
 
 //        result.getContent().forEach(review ->{
 //
@@ -66,5 +66,21 @@ public class ReviewTests {
 //            log.info(review.getImages());
 //            log.info("-----------------");
 //        });
+    }
+
+    @Test
+    public void testListAllImages(){
+
+        Product product = Product.builder().pno(13L).build();
+        Pageable pageable =
+                PageRequest.of(0,10,
+                        Sort.by("rno").descending());
+
+        reviewRepository.findByProduct(product, pageable)
+                .get().forEach(review -> {
+                    log.info(review);
+                    log.info(review.getImages());
+                    log.info("----------------");
+                });
     }
 }

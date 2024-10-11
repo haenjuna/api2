@@ -6,6 +6,7 @@ import org.zerock.api2.product.domain.Review;
 
 public interface ReviewSearch {
 
+
     Page<Review> listByProduct(Long pno, Pageable pageable);
 
 
