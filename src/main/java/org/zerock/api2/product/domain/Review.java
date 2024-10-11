@@ -1,13 +1,20 @@
 package org.zerock.api2.product.domain;
 
 import jakarta.persistence.*;
-import lombok.ToString;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @ToString(exclude = "product")
 @Table(name = "tbl_review", indexes = {
         @Index(name = "idx_review_product", columnList = "product_pno")
 })
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class Review {
 
     @Id
@@ -20,4 +27,20 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
+
+    @ElementCollection
+    @CollectionTable(name= "tbl_review_img")
+    @Builder.Default
+    private Set<ContentImage> images = new HashSet<>();
+
+    public void addFile(String filename){
+        ContentImage image = new ContentImage(images.size(),filename);
+        images.add(image);
+    }
+
+
+
+    public void changeImages(Set<ContentImage> images) {
+        this.images = images;
+    }
 }
